@@ -1,0 +1,11 @@
+<button mat-stroked-button routerLink="/add-assignment">Add Assignment</button>
+
+<ul>
+  @for (assignment of assignments(); track assignment.id) {
+  <li>
+    <strong>ID:</strong> {{ assignment.id }} <strong>Name:</strong> {{ assignment.nom }}
+    <strong>Due Date:</strong> {{ assignment.dateDeRendu }} <strong>Submitted:</strong>
+    {{ assignment.rendu ? 'Yes' : 'No' }}
+  </li>
+  }
+</ul>
