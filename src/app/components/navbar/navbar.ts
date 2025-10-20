@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  opened = true;
+  opened = false;
 
   toggleDrawer() {
     this.opened = !this.opened;
