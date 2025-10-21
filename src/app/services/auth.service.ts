@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface User {
   login: string;
@@ -12,7 +13,8 @@ interface User {
 export class AuthService {
   loggedIn = false;
   currentUser: User | null = null;
-  
+  private router = inject(Router);
+
   private users: User[] = [
     { login: 'user', password: 'user', role: 'user' },
     { login: 'admin', password: 'admin', role: 'admin' }
@@ -26,6 +28,12 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  logOut() {
+    this.loggedIn = false;
+    this.currentUser = null;
+    this.router.navigate(['/login']);
   }
 
 }
