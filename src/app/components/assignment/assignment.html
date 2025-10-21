@@ -1,4 +1,38 @@
+@if (AuthService.isAdmin()) {
 <button mat-stroked-button routerLink="/add-assignment">Add Assignment</button>
+}
+
+<ul>
+  @for (assignment of assignments(); track assignment.id) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{ assignment.nom }}</mat-card-title>
+      <mat-card-subtitle>{{ assignment.dateDeRendu }}</mat-card-subtitle>
+      <span class="spacer"></span>
+
+      @if (AuthService.isAdmin()) {
+      <mat-card-actions>
+        <button mat-icon-button routerLink="/edit-assignment"><mat-icon>edit</mat-icon></button>
+      </mat-card-actions>
+      }
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
+        Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+        originally bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button matButton>LIKE</button>
+      <button matButton>SHARE</button>
+      {{ assignment.rendu ? 'Yes' : 'No' }}
+    </mat-card-actions>
+  </mat-card>
+
+  }
+</ul>
 
 <ul>
   @for (assignment of assignments(); track assignment.id) {

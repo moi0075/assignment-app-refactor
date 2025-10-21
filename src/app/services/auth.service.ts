@@ -20,11 +20,12 @@ export class AuthService {
     { login: 'admin', password: 'admin', role: 'admin' }
   ];
 
-  login(login: string, password: string): boolean {
+  logIn(login: string, password: string): boolean {
     const user = this.users.find(u => u.login === login && u.password === password);
     if (user) {
       this.loggedIn = true;
       this.currentUser = user;
+      this.router.navigate(['/']);
       return true;
     }
     return false;
@@ -34,6 +35,10 @@ export class AuthService {
     this.loggedIn = false;
     this.currentUser = null;
     this.router.navigate(['/login']);
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser?.role === 'admin';
   }
 
 }

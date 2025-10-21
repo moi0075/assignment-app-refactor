@@ -20,9 +20,8 @@ export class Login {
 
   onLogin() {
     console.log('Login attempted with', this.login, this.password);
-    if(this.authService.login(this.login, this.password)) {
+    if(this.authService.logIn(this.login, this.password)) {
       console.log('Login successful');
-      this.router.navigate(['/']);
     } else {
       console.log('Login failed');
     }
