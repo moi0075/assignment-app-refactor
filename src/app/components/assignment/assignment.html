@@ -12,7 +12,7 @@
 
       @if (AuthService.isAdmin()) {
       <mat-card-actions>
-        <button mat-icon-button routerLink="/edit-assignment"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button [routerLink]="['/edit-assignment', assignment.id]"><mat-icon>edit</mat-icon></button>
       </mat-card-actions>
       }
     </mat-card-header>
@@ -25,21 +25,9 @@
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button matButton>LIKE</button>
-      <button matButton>SHARE</button>
-      {{ assignment.rendu ? 'Yes' : 'No' }}
+      {{ assignment.rendu ? 'Rendu : oui' : 'Rendu : non' }}
     </mat-card-actions>
   </mat-card>
 
-  }
-</ul>
-
-<ul>
-  @for (assignment of assignments(); track assignment.id) {
-  <li>
-    <strong>ID:</strong> {{ assignment.id }} <strong>Name:</strong> {{ assignment.nom }}
-    <strong>Due Date:</strong> {{ assignment.dateDeRendu }} <strong>Submitted:</strong>
-    {{ assignment.rendu ? 'Yes' : 'No' }}
-  </li>
   }
 </ul>
