@@ -10,12 +10,12 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-assignment',
   providers: [provideNativeDateAdapter()],
-  imports: [MatCardModule, MatChipsModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIconModule, MatSlideToggleModule],
+  imports: [MatCardModule, MatChipsModule, MatInputModule, MatDatepickerModule, MatButtonModule, MatIconModule, MatSlideToggleModule, FormsModule],
   templateUrl: './edit-assignment.html',
   styleUrl: './edit-assignment.css',
 })
