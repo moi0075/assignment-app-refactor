@@ -11,8 +11,8 @@
       </mat-card-title>
 
       <span class="spacer"></span>
-
-      <button matFab aria-label="Example icon button with a delete icon">
+<!-- type="button" pour éviter le submit par defaut -->
+      <button matFab type="button" (click)="deleteAssignment()">
         <mat-icon>delete</mat-icon>
       </button>
     </mat-card-header>
@@ -41,7 +41,7 @@
     <p><mat-slide-toggle [(ngModel)]="rendu" name="rendu">Rendu</mat-slide-toggle></p>
 
     <button matButton="filled" type="submit" >Save</button>
-    <button matButton="tonal">Cancel</button>
+    <button matButton="tonal" type="button" (click)="cancel()">Cancel</button>
   </mat-card>
 </form>
 }

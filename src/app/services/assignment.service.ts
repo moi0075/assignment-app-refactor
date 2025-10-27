@@ -21,7 +21,7 @@ export class AssignmentService {
     return this.assignments().find(assignment => assignment.id === id);
   }
 
-  removeAssignment(id: number) {
+  deleteAssignment(id: number) {
     this.assignments.set(this.assignments().filter(assignment => assignment.id !== id));
   }
 

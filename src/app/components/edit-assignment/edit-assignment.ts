@@ -68,4 +68,15 @@ export class EditAssignment implements OnInit {
     }
     this.router.navigate(['/assignments']);
   }
+
+  cancel() {
+    this.router.navigate(['/assignments']);
+  }
+
+  deleteAssignment() {
+    if (this.id !== null) {
+      this.assignmentService.deleteAssignment(this.id);
+    }
+    this.router.navigate(['/assignments']);
+  }
 }
