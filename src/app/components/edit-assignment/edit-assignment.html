@@ -1,12 +1,12 @@
 <!-- name fonctionne avec form ! -->
 @if (assignment) {
-<form (ngSubmit)="saveChanges()">
+<form (ngSubmit)="saveChanges()" #editForm="ngForm">
   <mat-card appearance="outlined">
     <mat-card-header>
       <mat-card-title>
         <mat-form-field>
           <mat-label>Nom du devoir</mat-label>
-          <input matInput [(ngModel)]="nomDevoir" name="nomDevoir" />
+          <input matInput [(ngModel)]="nomDevoir" name="nomDevoir" required/>
         </mat-form-field>
       </mat-card-title>
 
@@ -26,6 +26,7 @@
             [matDatepicker]="picker"
             [(ngModel)]="dateDeRendu"
             name="dateDeRendu"
+            required
           />
           <mat-hint>DD/MM/YYYY</mat-hint>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -40,7 +41,7 @@
 
     <p><mat-slide-toggle [(ngModel)]="rendu" name="rendu">Rendu</mat-slide-toggle></p>
 
-    <button matButton="filled" type="submit" >Save</button>
+    <button matButton="filled" type="submit" [disabled]="!editForm.form.valid">Save</button>
     <button matButton="tonal" type="button" (click)="cancel()">Cancel</button>
   </mat-card>
 </form>
