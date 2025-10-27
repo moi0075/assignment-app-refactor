@@ -25,4 +25,10 @@ export class AssignmentService {
     this.assignments.set(this.assignments().filter(assignment => assignment.id !== id));
   }
 
+  updateAssignment(id: number, updatedAssignment: Assignment) {
+    this.assignments.set(this.assignments().map(assignment => 
+      assignment.id === id ? updatedAssignment : assignment
+    ));
+  }
+
 }

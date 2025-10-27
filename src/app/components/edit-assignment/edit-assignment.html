@@ -1,37 +1,47 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>
+<!-- name fonctionne avec form ! -->
+@if (assignment) {
+<form (ngSubmit)="saveChanges()">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-form-field>
+          <mat-label>Nom du devoir</mat-label>
+          <input matInput [(ngModel)]="nomDevoir" name="nomDevoir" />
+        </mat-form-field>
+      </mat-card-title>
+
+      <span class="spacer"></span>
+
+      <button matFab aria-label="Example icon button with a delete icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-card-subtitle>
+        <mat-form-field>
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="dateDeRendu"
+            name="dateDeRendu"
+          />
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-card-subtitle>
       <mat-form-field>
-        <mat-label>Nom du devoir</mat-label>
-        <input matInput [ngModel]="assignment?.nom" />
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="description" name="description"></textarea>
       </mat-form-field>
-    </mat-card-title>
+    </mat-card-content>
 
-    <span class="spacer"></span>
+    <p><mat-slide-toggle [(ngModel)]="rendu" name="rendu">Rendu</mat-slide-toggle></p>
 
-    <button matFab aria-label="Example icon button with a delete icon">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </mat-card-header>
-
-  <mat-card-content>
-    <mat-card-subtitle>
-      <mat-form-field>
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" [ngModel]="assignment?.dateDeRendu" />
-        <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </mat-card-subtitle>
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <textarea matInput [ngModel]="assignment?.description"></textarea>
-    </mat-form-field>
-  </mat-card-content>
-
-  <p><mat-slide-toggle [ngModel]="assignment?.rendu">Rendu</mat-slide-toggle></p>
-
-    <button matButton="filled">Save</button>
+    <button matButton="filled" type="submit" >Save</button>
     <button matButton="tonal">Cancel</button>
-</mat-card>
+  </mat-card>
+</form>
+}
