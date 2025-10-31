@@ -16,5 +16,5 @@ import { AuthService } from '../../services/auth.service';
 export class Assignment {
   AssignmentService = inject(AssignmentService);
   AuthService = inject(AuthService);
-  assignments = this.AssignmentService.getAssignments();
+  assignments = this.AssignmentService.assignments;
 }

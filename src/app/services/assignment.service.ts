@@ -1,35 +1,32 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Assignment } from '../models/assignment.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssignmentService {
-  assignments = signal<Assignment[]>([
-    new Assignment(
-      1,
-      'TP1 sur WebComponents, un lecteur audio amélioré',
-      new Date('2020-01-17'),
-      true,
-      "Ce TP consiste à créer un lecteur audio en utilisant les WebComponents. Il doit inclure des fonctionnalités telles que la lecture, la pause, le saut de piste, et l'affichage des informations sur la piste en cours."
-    ),
-    new Assignment(
-      2,
-      'TP2 sur Angular, un joli gestionnaire de devoirs (Assignments)',
-      new Date('2020-12-15'),
-      false,
-      "Ce TP consiste à créer un gestionnaire de devoirs en utilisant Angular. Il doit inclure des fonctionnalités telles que l'ajout, la suppression et la modification de devoirs."
-    ),
-    new Assignment(
-      3,
-      'TP3 sur Angular, utilisation du router et de Web Services',
-      new Date('2021-01-04'),
-      false
-    ),
-  ]);
+  API_URL = 'http://localhost:8010/api/assignments';
+  http = inject(HttpClient);
+  assignments = signal<Assignment[]>([]);
 
-  getAssignments() {
-    return this.assignments;
+  constructor() {
+    // Pour initiliser les assignments depuis le serveur
+    this.loadAssignments();
+  }
+
+  loadAssignments() {
+    this.http.get<Assignment[]>(this.API_URL).subscribe((data) => {
+      console.log('Données reçues depuis le serveur :', data);
+      this.assignments.set(data);
+    });
+  }
+
+  addAssignment(newAssignment: Assignment) {
+    this.http.post<Assignment>(this.API_URL, newAssignment).subscribe((data) => {
+      console.log('Réponse du POST :', data);
+      this.assignments.set([...this.assignments(), data]);
+    });
   }
 
   getAssignmentById(id: number) {
@@ -48,10 +45,6 @@ export class AssignmentService {
     );
   }
 
-  addAssignment(newAssignment: Assignment) {
-    this.assignments.set([...this.assignments(), newAssignment]);
-  }
-
   // A modifier une fois connecter a la base de donnees
   getNewId(): number {
     const allAssignments = this.assignments();
@@ -61,5 +54,4 @@ export class AssignmentService {
     const maxId = Math.max(...allAssignments.map((a) => a.id));
     return maxId + 1;
   }
-
 }

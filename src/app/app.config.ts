@@ -12,6 +12,7 @@ import localeFr from '@angular/common/locales/fr';
 
 import {MatNativeDateModule} from '@angular/material/core';
 import { importProvidersFrom } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 
 registerLocaleData(localeFr);
 export const appConfig: ApplicationConfig = {
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     { provide: LOCALE_ID, useValue: 'fr' },
     importProvidersFrom([MatNativeDateModule]),
+    provideHttpClient()
   ],
 };
