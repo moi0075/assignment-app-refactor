@@ -29,29 +29,29 @@ export class AssignmentService {
     });
   }
 
-  getAssignmentById(id: number) {
-    return this.assignments().find((assignment) => assignment.id === id);
+  getAssignmentById(_id: string) {
+    return this.assignments().find((assignment) => assignment._id === _id);
   }
 
-  deleteAssignment(id: number) {
-    this.assignments.set(this.assignments().filter((assignment) => assignment.id !== id));
+  deleteAssignment(_id: string) {
+    this.assignments.set(this.assignments().filter((assignment) => assignment._id !== _id));
   }
 
-  updateAssignment(id: number, updatedAssignment: Assignment) {
+  updateAssignment(_id: string, updatedAssignment: Assignment) {
     this.assignments.set(
       this.assignments().map((assignment) =>
-        assignment.id === id ? updatedAssignment : assignment
+        assignment._id === _id ? updatedAssignment : assignment
       )
     );
   }
 
-  // A modifier une fois connecter a la base de donnees
-  getNewId(): number {
-    const allAssignments = this.assignments();
-    if (allAssignments.length === 0) {
-      return 1;
-    }
-    const maxId = Math.max(...allAssignments.map((a) => a.id));
-    return maxId + 1;
-  }
+  // // A modifier une fois connecter a la base de donnees
+  // getNewId(): number {
+  //   const allAssignments = this.assignments();
+  //   if (allAssignments.length === 0) {
+  //     return 1;
+  //   }
+  //   const maxId = Math.max(...allAssignments.map((a) => a.id));
+  //   return maxId + 1;
+  // }
 }

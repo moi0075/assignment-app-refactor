@@ -33,11 +33,11 @@ export class AddAssignment {
   dateDeRendu: Date = new Date();
   description: string = '';
   rendu: boolean = false;
+  _id: string = '';
 
   addAssignment() {
-    const newId = this.assignmentService.getNewId();
     const newAssignment = new Assignment(
-      newId,
+      this._id,
       this.nomDevoir,
       this.dateDeRendu,
       this.rendu,

@@ -3,7 +3,7 @@
 }
 
 <ul>
-  @for (assignment of assignments(); track assignment.id) {
+  @for (assignment of assignments(); track assignment._id) {
   <mat-card appearance="outlined">
     <mat-card-header>
       <mat-card-title>{{ assignment.nom }}</mat-card-title>
@@ -12,7 +12,7 @@
 
       @if (AuthService.isAdmin()) {
       <mat-card-actions>
-        <button mat-icon-button [routerLink]="['/edit-assignment', assignment.id]"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button [routerLink]="['/edit-assignment', assignment._id]"><mat-icon>edit</mat-icon></button>
       </mat-card-actions>
       }
     </mat-card-header>

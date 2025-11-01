@@ -35,7 +35,7 @@ export class EditAssignment implements OnInit {
 
   activatedRoute = inject(ActivatedRoute);
 
-  id: number | null = null;
+  _id: string | null = null;
   assignment: Assignment | undefined;
   nomDevoir: string = '';
   dateDeRendu: Date = new Date();
@@ -45,8 +45,8 @@ export class EditAssignment implements OnInit {
   updatedAssignment: Assignment | null = null;
 
   ngOnInit() {
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.assignment = this.assignmentService.getAssignmentById(this.id);
+    this._id = String(this.activatedRoute.snapshot.paramMap.get('_id'));
+    this.assignment = this.assignmentService.getAssignmentById(this._id);
     if (this.assignment) {
       this.nomDevoir = this.assignment.nom;
       this.dateDeRendu = this.assignment.dateDeRendu;
@@ -56,15 +56,15 @@ export class EditAssignment implements OnInit {
   }
 
   saveChanges() {
-    if (this.id !== null) {
+    if (this._id !== null) {
       this.updatedAssignment = {
-        id: this.id,
+        _id: this._id,
         nom: this.nomDevoir,
         dateDeRendu: this.dateDeRendu,
         description: this.description,
         rendu: this.rendu,
       };
-      this.assignmentService.updateAssignment(this.id, this.updatedAssignment);
+      this.assignmentService.updateAssignment(this._id, this.updatedAssignment);
     }
     this.router.navigate(['/assignments']);
   }
@@ -74,8 +74,8 @@ export class EditAssignment implements OnInit {
   }
 
   deleteAssignment() {
-    if (this.id !== null) {
-      this.assignmentService.deleteAssignment(this.id);
+    if (this._id !== null) {
+      this.assignmentService.deleteAssignment(this._id);
     }
     this.router.navigate(['/assignments']);
   }

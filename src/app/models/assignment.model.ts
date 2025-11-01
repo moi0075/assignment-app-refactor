@@ -1,12 +1,12 @@
 export class Assignment {
-  id: number;
+  _id: string;
   nom: string;
   dateDeRendu: Date;
   rendu: boolean;
   description?: string;
 
-  constructor(id: number, nom: string, dateDeRendu: Date, rendu: boolean, description?: string) {
-    this.id = id;
+  constructor(_id: string, nom: string, dateDeRendu: Date, rendu: boolean, description?: string) {
+    this._id = _id;
     this.nom = nom;
     this.dateDeRendu = dateDeRendu;
     this.rendu = rendu;
