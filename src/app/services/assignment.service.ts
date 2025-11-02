@@ -36,10 +36,6 @@ export class AssignmentService {
     });
   }
 
-  getAssignmentById(_id: string) {
-    return this.assignments().find((assignment) => assignment._id === _id);
-  }
-
   updateAssignment(_id: string, updatedAssignment: Assignment) {
     this.http.put<Assignment>(`${this.API_URL}/${_id}`, updatedAssignment).subscribe((data) => {
       console.log(`Assignment with _id=${_id} updated on server.`);
@@ -49,5 +45,9 @@ export class AssignmentService {
         )
       );
     });
+  }
+
+  getAssignmentById(_id: string) {
+    return this.assignments().find((assignment) => assignment._id === _id);
   }
 }

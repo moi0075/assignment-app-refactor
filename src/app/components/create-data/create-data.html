@@ -1,1 +1,18 @@
-<p>create-data works!</p>
+<form (ngSubmit)="createData()" #addForm="ngForm">
+  <mat-form-field>
+    <mat-label>Nombre de données à générer</mat-label>
+    <input
+      matInput
+      type="number"
+      [(ngModel)]="nbData"
+      name="nbData"
+      min="1"
+      max="{{ max }}"
+      required
+    />
+  </mat-form-field>
+
+  <button mat-stroked-button type="submit">Generate Data</button>
+</form>
+
+<!-- <button mat-stroked-button (click)="createData()">Create Mock Data</button> -->
