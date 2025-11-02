@@ -21,11 +21,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true; 
   }
 
-  if(authService.currentUser?.role === expectedRole) {
-    console.log('Access granted for role:', expectedRole);
+  if (expectedRole.includes(authService.currentUser?.role)) {
+    console.log('Access granted for role:', authService.currentUser?.role);
     return true;
-  }else {
-    console.log('Access denied need role:', expectedRole);
+  } else {
+    console.log('Access denied. User role:', authService.currentUser?.role, 'Expected one of:', expectedRole);
     router.navigate(['/login']);
     return false;
   }

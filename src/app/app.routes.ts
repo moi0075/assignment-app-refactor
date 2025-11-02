@@ -11,6 +11,6 @@ export const routes: Routes = [
     { path: 'assignments', component: Assignment },
     { path: 'add-assignment', component: AddAssignment, canActivate: [authGuard], data: { role: 'admin' } },
     { path: 'create-data', component: CreateData, canActivate: [authGuard] },
-    { path: 'edit-assignment/:_id', component: EditAssignment, canActivate: [authGuard], data: { role: 'admin' } },
+    { path: 'edit-assignment/:_id', component: EditAssignment, canActivate: [authGuard], data: { role: ['admin', 'user'] } },
     { path: 'login', component: Login }
 ];

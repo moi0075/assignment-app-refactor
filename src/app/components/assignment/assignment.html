@@ -10,7 +10,7 @@
       <mat-card-subtitle>{{ assignment.dateDeRendu }}</mat-card-subtitle>
       <span class="spacer"></span>
 
-      @if (AuthService.isAdmin()) {
+      @if (AuthService.isUserOrAdmin()) {
       <mat-card-actions>
         <button mat-icon-button [routerLink]="['/edit-assignment', assignment._id]"><mat-icon>edit</mat-icon></button>
       </mat-card-actions>

@@ -8,7 +8,7 @@ interface User {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   loggedIn = false;
@@ -17,11 +17,11 @@ export class AuthService {
 
   private users: User[] = [
     { login: 'user', password: 'user', role: 'user' },
-    { login: 'admin', password: 'admin', role: 'admin' }
+    { login: 'admin', password: 'admin', role: 'admin' },
   ];
 
   logIn(login: string, password: string): boolean {
-    const user = this.users.find(u => u.login === login && u.password === password);
+    const user = this.users.find((u) => u.login === login && u.password === password);
     if (user) {
       this.loggedIn = true;
       this.currentUser = user;
@@ -41,4 +41,7 @@ export class AuthService {
     return this.currentUser?.role === 'admin';
   }
 
+  isUserOrAdmin(): boolean {
+    return this.currentUser?.role === 'admin' || this.currentUser?.role === 'user';
+  }
 }
