@@ -3,29 +3,31 @@
 }
 
 <ul>
-  @for (assignment of assignments(); track assignment._id) {
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>{{ assignment.nom }}</mat-card-title>
-      <mat-card-subtitle>{{ assignment.dateDeRendu }}</mat-card-subtitle>
-      <span class="spacer"></span>
+    @for (assignment of assignments(); track assignment._id) {
+    <mat-card appearance="outlined">
+        <mat-card-header>
+            <mat-card-title>{{ assignment.nom }}</mat-card-title>
+            <mat-card-subtitle>{{ assignment.dateDeRendu }}</mat-card-subtitle>
+            <span class="spacer"></span>
 
-      @if (AuthService.isUserOrAdmin()) {
-      <mat-card-actions>
-        <button mat-icon-button [routerLink]="['/edit-assignment', assignment._id]"><mat-icon>edit</mat-icon></button>
-      </mat-card-actions>
-      }
-    </mat-card-header>
+            @if (AuthService.isUserOrAdmin()) {
+            <mat-card-actions>
+                <button mat-icon-button [routerLink]="['/edit-assignment', assignment._id]">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </mat-card-actions>
+            }
+        </mat-card-header>
 
-    <mat-card-content>
-      <p>
-        {{ assignment.description }}
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      {{ assignment.rendu ? 'Rendu : oui' : 'Rendu : non' }}
-    </mat-card-actions>
-  </mat-card>
+        <mat-card-content>
+            <p>
+                {{ assignment.description }}
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            {{ assignment.rendu ? 'Rendu : oui' : 'Rendu : non' }}
+        </mat-card-actions>
+    </mat-card>
 
-  }
+    }
 </ul>

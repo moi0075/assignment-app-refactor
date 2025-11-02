@@ -1,7 +1,6 @@
 .spacer {
-  flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 mat-drawer-container {
-  height: calc(100vh - 64px);
+    height: calc(100vh - 64px);
 }
-
