@@ -10,24 +10,24 @@ import { inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'app-navbar',
-    imports: [
-        MatIconModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatListModule,
-        RouterModule,
-        MatMenuModule,
-    ],
-    templateUrl: './navbar.html',
-    styleUrl: './navbar.css',
+  selector: 'app-navbar',
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    RouterModule,
+    MatMenuModule,
+  ],
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.css',
 })
 export class Navbar {
-    opened = false;
-    authService = inject(AuthService);
+  opened = false;
+  authService = inject(AuthService);
 
-    toggleDrawer() {
-        this.opened = !this.opened;
-    }
+  toggleDrawer() {
+    this.opened = !this.opened;
+  }
 }

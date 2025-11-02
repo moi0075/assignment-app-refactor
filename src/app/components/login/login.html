@@ -1,13 +1,13 @@
 <form (ngSubmit)="onLogin()">
-    <mat-form-field>
-        <mat-label>login</mat-label>
-        <input matInput [(ngModel)]="login" name="login" required />
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>login</mat-label>
+    <input matInput [(ngModel)]="login" name="login" required />
+  </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>password</mat-label>
-        <input matInput [(ngModel)]="password" name="password" type="password" required />
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>password</mat-label>
+    <input matInput [(ngModel)]="password" name="password" type="password" required />
+  </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">Connection</button>
+  <button mat-raised-button color="primary" type="submit">Connection</button>
 </form>

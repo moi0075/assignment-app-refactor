@@ -8,13 +8,13 @@ import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-    selector: 'app-assignment',
-    imports: [MatButtonModule, RouterModule, MatCardModule, MatChipsModule, MatIcon],
-    templateUrl: './assignment.html',
-    styleUrl: './assignment.css',
+  selector: 'app-assignment',
+  imports: [MatButtonModule, RouterModule, MatCardModule, MatChipsModule, MatIcon],
+  templateUrl: './assignment.html',
+  styleUrl: './assignment.css',
 })
 export class Assignment {
-    AssignmentService = inject(AssignmentService);
-    AuthService = inject(AuthService);
-    assignments = this.AssignmentService.assignments;
+  AssignmentService = inject(AssignmentService);
+  AuthService = inject(AuthService);
+  assignments = this.AssignmentService.assignments;
 }

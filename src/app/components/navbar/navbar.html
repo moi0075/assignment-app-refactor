@@ -1,41 +1,41 @@
 <mat-toolbar>
-    <button mat-icon-button (click)="toggleDrawer()">
-        <mat-icon>menu</mat-icon>
+  <button mat-icon-button (click)="toggleDrawer()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <button matIconButton routerLink="/assignments">
+    <mat-icon>home</mat-icon>
+  </button>
+
+  <span>My App</span>
+
+  <span class="spacer"></span>
+
+  <button matIconButton [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/login">
+      <span>Login</span>
     </button>
-
-    <button matIconButton routerLink="/assignments">
-        <mat-icon>home</mat-icon>
+    <button mat-menu-item [disabled]="!authService.loggedIn" (click)="authService.logOut()">
+      <span>Logout</span>
     </button>
-
-    <span>My App</span>
-
-    <span class="spacer"></span>
-
-    <button matIconButton [matMenuTriggerFor]="menu">
-        <mat-icon>account_circle</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login">
-            <span>Login</span>
-        </button>
-        <button mat-menu-item [disabled]="!authService.loggedIn" (click)="authService.logOut()">
-            <span>Logout</span>
-        </button>
-    </mat-menu>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container>
-    <mat-drawer mode="side" [opened]="opened">
-        <mat-nav-list (click)="toggleDrawer()">
-            <a mat-list-item routerLink="/assignments">Liste des devoirs</a>
-            @if (authService.isAdmin()) {
-            <a mat-list-item routerLink="/add-assignment">Ajout d'un devoir</a>
-            <a mat-list-item routerLink="/create-data">Génération de données de test</a>
-            }
-        </mat-nav-list>
-    </mat-drawer>
-    <mat-drawer-content>
-        <router-outlet></router-outlet>
-    </mat-drawer-content>
+  <mat-drawer mode="side" [opened]="opened">
+    <mat-nav-list (click)="toggleDrawer()">
+      <a mat-list-item routerLink="/assignments">Liste des devoirs</a>
+      @if (authService.isAdmin()) {
+      <a mat-list-item routerLink="/add-assignment">Ajout d'un devoir</a>
+      <a mat-list-item routerLink="/create-data">Génération de données de test</a>
+      }
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
 </mat-drawer-container>
