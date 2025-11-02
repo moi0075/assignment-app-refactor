@@ -43,8 +43,10 @@ export class AddAssignment {
       this.rendu,
       this.description
     );
-    this.assignmentService.addAssignment(newAssignment);
-    this.router.navigate(['/assignments']);
+
+    this.assignmentService.addAssignment(newAssignment).subscribe(() => {
+      this.router.navigate(['/assignments']);
+    });
   }
 
   cancel() {

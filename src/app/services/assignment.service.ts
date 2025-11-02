@@ -1,6 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Assignment } from '../models/assignment.model';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -22,27 +24,56 @@ export class AssignmentService {
     });
   }
 
-  addAssignment(newAssignment: Assignment) {
-    this.http.post<Assignment>(this.API_URL, newAssignment).subscribe((data) => {
-      console.log('Réponse du POST :', data);
-      this.assignments.set([...this.assignments(), data]);
-    });
+  // addAssignment(newAssignment: Assignment) {
+  //   this.http.post<Assignment>(this.API_URL, newAssignment).subscribe((data) => {
+  //     console.log('Réponse du POST :', data);
+  //     this.assignments.set([...this.assignments(), data]);
+  //   });
+  // }
+
+  // deleteAssignment(_id: string) {
+  //   this.http.delete(`${this.API_URL}/${_id}`).subscribe(() => {
+  //     console.log(`Assignment with _id=${_id} deleted on server.`);
+  //     this.assignments.set(this.assignments().filter((assignment) => assignment._id !== _id));
+  //   });
+  // }
+
+  // updateAssignment(_id: string, updatedAssignment: Assignment) {
+  //   this.http.put<Assignment>(`${this.API_URL}/${_id}`, updatedAssignment).subscribe((data) => {
+  //     console.log(`Assignment with _id=${_id} updated on server.`);
+  //     this.assignments.set(
+  //       this.assignments().map((assignment) => (assignment._id === _id ? data : assignment))
+  //     );
+  //   });
+  // }
+
+  addAssignment(newAssignment: Assignment): Observable<Assignment> {// <-- Retourne un Observable
+    return this.http.post<Assignment>(this.API_URL, newAssignment).pipe(
+      tap((data) => {
+        console.log('Ajout d\'un nouvel assignment :', data);
+        this.assignments.set([...this.assignments(), data]);
+      })
+    );
   }
 
-  deleteAssignment(_id: string) {
-    this.http.delete(`${this.API_URL}/${_id}`).subscribe(() => {
-      console.log(`Assignment with _id=${_id} deleted on server.`);
-      this.assignments.set(this.assignments().filter((assignment) => assignment._id !== _id));
-    });
+  deleteAssignment(_id: string):Observable<void> {// <-- Retourne un Observable
+    return this.http.delete<void>(`${this.API_URL}/${_id}`).pipe(
+      tap(() => {
+        console.log(`Assignment with _id=${_id} deleted on server.`);
+        this.assignments.set(this.assignments().filter((assignment) => assignment._id !== _id));
+      })
+    );
   }
 
-  updateAssignment(_id: string, updatedAssignment: Assignment) {
-    this.http.put<Assignment>(`${this.API_URL}/${_id}`, updatedAssignment).subscribe((data) => {
-      console.log(`Assignment with _id=${_id} updated on server.`);
-      this.assignments.set(
-        this.assignments().map((assignment) => (assignment._id === _id ? data : assignment))
-      );
-    });
+  updateAssignment(_id: string, updatedAssignment: Assignment): Observable<Assignment> {// <-- Retourne un Observable
+    return this.http.put<Assignment>(`${this.API_URL}/${_id}`, updatedAssignment).pipe(
+      tap((data) => {
+        console.log(`Assignment with _id=${_id} updated on server.`);
+        this.assignments.set(
+          this.assignments().map((assignment) => (assignment._id === _id ? data : assignment))
+        );
+      })
+    );
   }
 
   getAssignmentById(_id: string) {

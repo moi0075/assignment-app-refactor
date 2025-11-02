@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-assignment',
@@ -24,6 +26,8 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatSlideToggleModule,
     FormsModule,
+    MatFormFieldModule,
+    CommonModule
   ],
 
   templateUrl: './edit-assignment.html',
@@ -64,9 +68,10 @@ export class EditAssignment implements OnInit {
         description: this.description,
         rendu: this.rendu,
       };
-      this.assignmentService.updateAssignment(this._id, this.updatedAssignment);
+      this.assignmentService.updateAssignment(this._id, this.updatedAssignment).subscribe(() => {
+        this.router.navigate(['/assignments']);
+      });
     }
-    this.router.navigate(['/assignments']);
   }
 
   cancel() {
@@ -75,8 +80,9 @@ export class EditAssignment implements OnInit {
 
   deleteAssignment() {
     if (this._id !== null) {
-      this.assignmentService.deleteAssignment(this._id);
+      this.assignmentService.deleteAssignment(this._id).subscribe(() => {
+        this.router.navigate(['/assignments']);
+      });
     }
-    this.router.navigate(['/assignments']);
   }
 }
