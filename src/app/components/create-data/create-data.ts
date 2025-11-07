@@ -9,6 +9,7 @@ import { Assignment } from '../../models/assignment.model';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-data',
@@ -17,6 +18,7 @@ import { forkJoin } from 'rxjs/internal/observable/forkJoin';
   styleUrl: './create-data.css',
 })
 export class CreateData {
+  router = inject(Router);
   max: number = 50;
   nbData: number = 5;
   assignments = inject(AssignmentService);
@@ -42,6 +44,7 @@ export class CreateData {
     forkJoin(appelsEnAttente).subscribe({
       next: (resultats) => {
         console.log(`SUCCÈS ! ${resultats.length} devoirs ont été ajoutés.`);
+        this.router.navigate(['/assignments']);
       },
       error: (err) => {
         console.error("Erreur lors de l'ajout en masse :", err);
