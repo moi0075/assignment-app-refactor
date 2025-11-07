@@ -13,18 +13,6 @@ export class AssignmentService {
   http = inject(HttpClient);
   assignments = signal<Assignment[]>([]);
   totalDocs = signal<number>(0);
-  
-  constructor() {
-    // Pour initiliser les assignments depuis le serveur
-    this.loadAssignments(1, 10);
-  }
-
-  // loadAssignments() {
-  //   this.http.get<Assignment[]>(this.API_URL).subscribe((data) => {
-  //     console.log('Données reçues depuis le serveur :', data);
-  //     this.assignments.set(data);
-  //   });
-  // }
 
   loadAssignments(page: number = 1, limit: number = 10) {
     this.http.get<PaginatedAssignments>(`${this.API_URL}?page=${page}&limit=${limit}`).subscribe((data) => {
@@ -52,7 +40,7 @@ export class AssignmentService {
     );
   }
 
-  updateAssignment(_id: string, updatedAssignment: Assignment): Observable<Assignment> {// <-- Retourne un Observable
+  updateAssignment(_id: string, updatedAssignment: Assignment): Observable<Assignment> {// Retourne un Observable
     return this.http.put<Assignment>(`${this.API_URL}/${_id}`, updatedAssignment).pipe(
       tap((data) => {
         console.log(`Assignment with _id=${_id} updated on server.`);
